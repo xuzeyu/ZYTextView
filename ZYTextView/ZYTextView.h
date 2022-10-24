@@ -1,39 +1,18 @@
-# ZYTextView
+//
+//  ZYTextView.h
+//  Example
+//
+//  Created by XUZY on 2022/10/24.
+//
 
-## 介绍
-一个强大的UITextView子类，三大功能，让TextView自带placeholder属性、自动高度、监听编辑状态，支持UITableViewCell内嵌
+#import <UIKit/UIKit.h>
+@class ZYTextView;
 
-## 如何导入
-```
-pod 'ZYTextView', :git => 'https://github.com/xuzeyu/ZYTextView.git'
-```
+typedef void(^ZYTextViewHandler)(ZYTextView *textView);
+typedef void(^ZYTextViewHeightDidChangedBlock)(ZYTextView *textView, CGFloat currentTextViewHeight);
 
-## 如何使用
-```objc
+IB_DESIGNABLE
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    __weak typeof(self) weakSelf = self;
-    Test_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test_Cell"];
-    cell.textView.placeholder = @"请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入";
-    cell.textView.disableNewline = cell.textView.disableWhitespace = cell.textView.isResignFirstResponderAfterReturn = YES;
-    cell.textView.returnKeyType = UIReturnKeyDone;
-    
-    cell.textView.text = @"当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的";
-    cell.textView.textViewHeightDidChanged = ^(ZYTextView *textView, CGFloat currentTextViewHeight) {
-        [textView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(currentTextViewHeight);
-        }];
-        [weakSelf.tableView beginUpdates];
-        [weakSelf.tableView endUpdates];
-    };
-    
-    return cell;
-}
- 
-```
-
-## 更多
-```objc
 @interface ZYTextView : UITextView
 
 /**
@@ -157,4 +136,4 @@ pod 'ZYTextView', :git => 'https://github.com/xuzeyu/ZYTextView.git'
 @property (nonatomic, readonly) NSString *formatText;
 
 @end
-```
+
