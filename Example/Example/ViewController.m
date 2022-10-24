@@ -43,7 +43,7 @@
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -52,6 +52,9 @@
     cell.textView.placeholder = @"请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容";
     cell.textView.disableNewline = cell.textView.disableWhitespace = cell.textView.isResignFirstResponderAfterReturn = YES;
     cell.textView.returnKeyType = UIReturnKeyDone;
+    [cell.textView addTextDidChangeHandler:^(ZYTextView *textView) {
+        NSLog(@"内容改变了:%@", textView.text);
+    }];
     cell.textView.text = @"当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的";
     cell.textView.textViewHeightDidChanged = ^(ZYTextView *textView, CGFloat currentTextViewHeight) {
         [textView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -60,8 +63,6 @@
         [weakSelf.tableView beginUpdates];
         [weakSelf.tableView endUpdates];
     };
-    
-   
     return cell;
 }
 

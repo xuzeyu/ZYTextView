@@ -26,7 +26,7 @@ IB_DESIGNABLE
 - (void)addTextDidBeginEditingHandler:(ZYTextViewHandler)beginEditingHandler;
 
 /**
- 设定文本改变Block回调. (切记弱化引用, 以免造成内存泄露.)
+ 设定文本改变Block回调. (切记弱化引用, 以免造成内存泄露.) 需要在setText:方法调用之前，不然获取不到setText:的改变
  */
 - (void)addTextDidChangeHandler:(ZYTextViewHandler)eventHandler;
 

@@ -163,7 +163,9 @@
             self.frame = frame;
             // 调用block
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                if (self.textViewHeightDidChanged) self.textViewHeightDidChanged(self, currentTextViewHeight);
+                [UIView performWithoutAnimation:^{
+                    if (self.textViewHeightDidChanged) self.textViewHeightDidChanged(self, currentTextViewHeight);
+                }];
             });
             // 记录当前高度
             self.lastHeight = currentTextViewHeight;
