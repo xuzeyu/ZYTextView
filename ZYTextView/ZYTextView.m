@@ -6,8 +6,6 @@
 //
 
 #import "ZYTextView.h"
-#import "Masonry.h"
-#import <CoreText/CTFramesetter.h>
 
 @interface ZYTextView () <UITextViewDelegate>
 @property (nonatomic, copy) ZYTextViewHandler beginEditingHandler; ///< 文本开始编辑Block

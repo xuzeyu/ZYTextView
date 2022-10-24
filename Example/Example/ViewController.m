@@ -52,11 +52,10 @@
     cell.textView.placeholder = @"请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容";
     cell.textView.disableNewline = cell.textView.disableWhitespace = cell.textView.isResignFirstResponderAfterReturn = YES;
     cell.textView.returnKeyType = UIReturnKeyDone;
-    
     cell.textView.text = @"当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的";
     cell.textView.textViewHeightDidChanged = ^(ZYTextView *textView, CGFloat currentTextViewHeight) {
         [textView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(currentTextViewHeight);
+            make.height.mas_equalTo(currentTextViewHeight).priorityHigh();
         }];
         [weakSelf.tableView beginUpdates];
         [weakSelf.tableView endUpdates];
