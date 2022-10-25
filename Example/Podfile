@@ -2,4 +2,5 @@ source 'https://cdn.cocoapods.org/'
 platform :ios, '8.2'
 target :'Example' do
 pod 'Masonry'
+pod 'IQKeyboardManager'
 end

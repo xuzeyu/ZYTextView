@@ -8,26 +8,91 @@
 pod 'ZYTextView', :git => 'https://github.com/xuzeyu/ZYTextView.git'
 ```
 
+## 效果
+![image](https://github.com/xuzeyu/ZYTextView/GIF1.gif?raw=true)
+
 ## 如何使用
 ```objc
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof(self) weakSelf = self;
-    Test_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test_Cell"];
-    cell.textView.placeholder = @"请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入内容请输入";
-    cell.textView.disableNewline = cell.textView.disableWhitespace = cell.textView.isResignFirstResponderAfterReturn = YES;
-    cell.textView.returnKeyType = UIReturnKeyDone;
-    
-    cell.textView.text = @"当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的当时发生的";
-    cell.textView.textViewHeightDidChanged = ^(ZYTextView *textView, CGFloat currentTextViewHeight) {
-        [textView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(currentTextViewHeight);
+    if (indexPath.row == 0) {
+        Test_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test_Cell"];
+        cell.textView.placeholder = @"固定高度";
+        cell.textView.returnKeyType = UIReturnKeyNext;
+        [cell.textView addTextDidChangeHandler:^(ZYTextView *textView) {
+            NSLog(@"内容改变了:%@", textView.text);
         }];
-        [weakSelf.tableView beginUpdates];
-        [weakSelf.tableView endUpdates];
-    };
-    
-    return cell;
+       
+        [cell.textView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(60);
+        }];
+        
+        return cell;
+    }else if (indexPath.row == 1) {
+        Test_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test_Cell"];
+        cell.textView.placeholder = @"固定高度，设置最大字符串长度为10";
+        cell.textView.returnKeyType = UIReturnKeyNext;
+        [cell.textView addTextDidChangeHandler:^(ZYTextView *textView) {
+            NSLog(@"内容改变了:%@", textView.text);
+        }];
+        cell.textView.maxLength = 10;
+       
+        [cell.textView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(60);
+        }];
+        
+        return cell;
+    }else if (indexPath.row == 2) {
+        Test_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test_Cell"];
+        cell.textView.placeholder = @"固定高度，禁止换行，禁止空格，点击return自动关闭键盘";
+        cell.textView.disableNewline = cell.textView.disableWhitespace = cell.textView.isResignFirstResponderAfterReturn = YES;
+        cell.textView.returnKeyType = UIReturnKeyDone;
+        [cell.textView addTextDidChangeHandler:^(ZYTextView *textView) {
+            NSLog(@"内容改变了:%@", textView.text);
+        }];
+       
+        [cell.textView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(60);
+        }];
+        
+        return cell;
+    }else if (indexPath.row == 3) {
+        Test_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test_Cell"];
+        cell.textView.placeholder = @"自动增加高度";
+        cell.textView.returnKeyType = UIReturnKeyNext;
+        [cell.textView addTextDidChangeHandler:^(ZYTextView *textView) {
+            NSLog(@"内容改变了:%@", textView.text);
+        }];
+        cell.textView.textViewHeightDidChanged = ^(ZYTextView *textView, CGFloat currentTextViewHeight) {
+            [textView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(currentTextViewHeight).priorityHigh();
+            }];
+            [weakSelf.tableView beginUpdates];
+            [weakSelf.tableView endUpdates];
+        };
+        cell.textView.text = @"";
+        return cell;
+    }else if (indexPath.row == 4) {
+        Test_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test_Cell"];
+        cell.textView.placeholder = @"自动增加高度，设置最小高度和最大高度";
+        cell.textView.returnKeyType = UIReturnKeyNext;
+        [cell.textView addTextDidChangeHandler:^(ZYTextView *textView) {
+            NSLog(@"内容改变了:%@", textView.text);
+        }];
+        cell.textView.textViewHeightDidChanged = ^(ZYTextView *textView, CGFloat currentTextViewHeight) {
+            [textView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(currentTextViewHeight).priorityHigh();
+            }];
+            [weakSelf.tableView beginUpdates];
+            [weakSelf.tableView endUpdates];
+        };
+        cell.textView.text = @"";
+        cell.textView.minHeight = 60;
+        cell.textView.maxHeight = 80;
+        return cell;
+    }
+    return nil;
 }
  
 ```
@@ -47,7 +112,7 @@ pod 'ZYTextView', :git => 'https://github.com/xuzeyu/ZYTextView.git'
 - (void)addTextDidBeginEditingHandler:(ZYTextViewHandler)beginEditingHandler;
 
 /**
- 设定文本改变Block回调. (切记弱化引用, 以免造成内存泄露.)
+ 设定文本改变Block回调. (切记弱化引用, 以免造成内存泄露.) 需要在setText:方法调用之前，不然获取不到setText:的改变
  */
 - (void)addTextDidChangeHandler:(ZYTextViewHandler)eventHandler;
 
