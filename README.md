@@ -9,7 +9,7 @@ pod 'ZYTextView', :git => 'https://github.com/xuzeyu/ZYTextView.git'
 ```
 
 ## 效果
-![image](https://github.com/xuzeyu/ZYTextView/GIF1.gif?raw=true)
+![image](https://github.com/xuzeyu/ZYTextView/blob/main/GIF1.gif)
 
 ## 如何使用
 ```objc
