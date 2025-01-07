@@ -197,8 +197,12 @@
 - (void)setFont:(UIFont *)font
 {
     [super setFont:font];
-    
-    self.placeholderTextView.font = font;
+    self.placeholderFont = font;
+}
+
+- (void)setTextAlignment:(NSTextAlignment)textAlignment {
+    [super setTextAlignment:textAlignment];
+    self.placeholderTextAlignment = textAlignment;
 }
 
 - (void)setMaxLength:(NSUInteger)maxLength
@@ -216,7 +220,6 @@
 - (void)setBorderColor:(UIColor *)borderColor
 {
     if (!borderColor) return;
-    
     _borderColor = borderColor;
     self.layer.borderColor = _borderColor.CGColor;
 }
@@ -230,11 +233,8 @@
 - (void)setPlaceholder:(NSString *)placeholder
 {
     if (!placeholder) return;
-    
     _placeholder = [placeholder copy];
-    
     if (_placeholder.length > 0) {
-        
         self.placeholderTextView.text = _placeholder;
     }
 }
@@ -242,19 +242,21 @@
 - (void)setPlaceholderColor:(UIColor *)placeholderColor
 {
     if (!placeholderColor) return;
-    
     _placeholderColor = placeholderColor;
-    
     self.placeholderTextView.textColor = _placeholderColor;
 }
 
 - (void)setPlaceholderFont:(UIFont *)placeholderFont
 {
     if (!placeholderFont) return;
-    
     _placeholderFont = placeholderFont;
-    
     self.placeholderTextView.font = _placeholderFont;
+}
+
+- (void)setPlaceholderTextAlignment:(NSTextAlignment)placeholderTextAlignment
+{
+    _placeholderTextAlignment = placeholderTextAlignment;
+    self.placeholderTextView.textAlignment = _placeholderTextAlignment;
 }
 
 - (void)setPlaceholderMaximumNumberOfLines:(NSInteger)placeholderMaximumNumberOfLines {

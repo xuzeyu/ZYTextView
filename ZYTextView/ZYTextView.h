@@ -76,6 +76,11 @@ IB_DESIGNABLE
 @property (nonatomic, strong) UIFont *placeholderFont;
 
 /**
+ placeholder文本对齐方式, 默认为UITextView的默认左对齐.
+ */
+@property (nonatomic, assign) NSTextAlignment placeholderTextAlignment;
+
+/**
  placeholder文本最大行数
  */
 @property (nonatomic, assign) NSInteger placeholderMaximumNumberOfLines;
