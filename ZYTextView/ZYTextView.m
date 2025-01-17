@@ -141,6 +141,12 @@
     [self.placeholderTextView setTextContainerInset:zy_textContainerInset];
 }
 
+- (void)setZy_textContainerLineFragmentPadding:(CGFloat)zy_textContainerLineFragmentPadding {
+    _zy_textContainerLineFragmentPadding = zy_textContainerLineFragmentPadding;
+    self.textContainer.lineFragmentPadding = zy_textContainerLineFragmentPadding;
+    self.placeholderTextView.textContainer.lineFragmentPadding = zy_textContainerLineFragmentPadding;
+}
+
 - (void)textViewHeightDidChangedCalculate {
     if (self.textViewHeightDidChanged && self.bounds.size.width > 0 && (self.maxHeight >= self.bounds.size.height || self.maxHeight == 0)) {
         if (self.maxHeight == 0) {

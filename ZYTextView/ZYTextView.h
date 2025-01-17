@@ -91,9 +91,14 @@ IB_DESIGNABLE
 @property (nonatomic, assign) NSLineBreakMode placeholderLineBreakMode;
 
 /**
- UITextView的text和placeholder四边间距 默认UIEdgeInsetsMake(8, 3, 8, 3)
+ UITextView的text和placeholder四边间距 默认UIEdgeInsetsMake(8, 3, 8, 3),主要上下边距
  */
 @property (nonatomic, assign) IBInspectable UIEdgeInsets zy_textContainerInset;
+
+/**
+ UITextView左右边距
+ */
+@property (nonatomic, assign) IBInspectable CGFloat zy_textContainerLineFragmentPadding;
 
 /**
   是否禁止换行 默认为NO
